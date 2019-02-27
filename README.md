@@ -24,4 +24,4 @@ Python 3.4.5 or newer.
 
 ## Acknowledgement
 
-Thanks to [newcoder](http://newcoder.io/gui/) for the guide. I was not familiar with tkinter beforehand, so most of the front-end code is based on his tutorial.
+Thanks to [newcoder](http://newcoder.io/gui/) for the guide on writing the tkinter code. I was not familiar with it beforehand, so most of the front-end is based on his tutorial.
