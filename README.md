@@ -1,6 +1,6 @@
 # Sudoku
 
-Implementation of a traditional game of sudoku.
+Implementation of a traditional game of sudoku. This implementation also allows for rectangular boxes, and sizes other than the traditional 3x3 format.
 
 ## Running
 
