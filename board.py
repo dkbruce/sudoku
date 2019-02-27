@@ -36,7 +36,7 @@ class Board(object):
             self.rows = rows
             self.cols = cols
             self.boxes = boxes
-            self.startrows = rows
+            self.startrows = [list(map(int, row.split())) for row in newboard[1:]]
         except FileNotFoundError:
             print('Invalid filepath')
         
@@ -96,8 +96,13 @@ class Board(object):
         self.boxes[box_num][box_col] = num
 
     def insert(self, row, col, num):
-        if(self.startrows[row][col] == 0):
+        if self.writable(row, col):
             self.update(row, col, num)
+
+    def writable(self, row, col):
+        if self.startrows[row][col] == 0:
+            return True
+        return False
             
 
 class TestBoard(unittest.TestCase):
@@ -159,6 +164,29 @@ class TestBoard(unittest.TestCase):
                                           [3, 1, 0, 2], [0, 2, 0, 0]])
         self.assertEqual(new_board.boxes, [[1, 2, 0, 4], [3, 0, 1, 2],
                                            [2, 1, 0, 0], [0, 0, 2, 0]])
+
+    def test_big(self):
+        new_board = Board('tests/big.test')
+        self.assertEqual(new_board.rows_valid(), True)
+        self.assertEqual(new_board.cols_valid(), True)
+        self.assertEqual(new_board.boxes_valid(), True)
+        self.assertEqual(new_board.entries_valid(), True)
+        self.assertEqual(new_board.boxes, [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],])
 
 
 if __name__ == '__main__':
